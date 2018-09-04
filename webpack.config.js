@@ -19,7 +19,7 @@ module.exports = {
         filename: '[name].[hash].js',
         path: path.resolve('dist')
     },
-    devtool: 'source-map',
+    // devtool: 'source-map',
     module: { rules },
     plugins: [
         new webpack.optimize.UglifyJsPlugin({
@@ -31,9 +31,10 @@ module.exports = {
         }),
         new ExtractTextPlugin('styles.css'),
         new HtmlPlugin({
-            title: 'Loft School sample project',
-            template: 'index.hbs'
+            title: 'Geootzyv',
+            template: './src/index.html'
         }),
         new CleanWebpackPlugin(['dist'])
     ]
+
 };

@@ -1,3 +1,5 @@
+import './styles/styles.css';
+
 ymaps.ready(init);
 
 function init() {

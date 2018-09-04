@@ -26,6 +26,12 @@ function init() {
 
         popupForm = (form, {left, top, user = '', place = '', feedback = '', coords, id = -1}) => {
             form.classList.remove('display-none');
+            if (top + form.clientHeight > document.body.clientHeight) {
+                top = top - ((top + form.clientHeight) - document.body.clientHeight);
+            }
+            if (left + form.clientWidth > document.body.clientWidth) {
+                left = left - ((left + form.clientWidth) - document.body.clientWidth);
+            }
             form.style.left = left + 'px';
             form.style.top = top + 'px';
             inputUser.value = user;

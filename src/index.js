@@ -14,6 +14,7 @@ function init() {
         renderFeedbacks = Handlebars.compile(document.querySelector('#feedbacks-list-template').innerHTML),
 
         feedbacks = [],
+        coordsFeedbacks = [],
 
         closeForm = (form) => {
             form.classList.add('display-none');
@@ -77,47 +78,6 @@ function init() {
             hasHint: false
         });
 
-/*
-    function ClickBehavior() {
-        this.options = new ymaps.option.Manager();
-        this.events = new ymaps.event.Manager();
-    }
-
-    ClickBehavior.prototype = {
-        constructor: ClickBehavior,
-        enable: function () {
-            this._parent.getMap().events.add('click', this._onClick, this);
-        },
-        disable: function () {
-            this._parent.getMap().events.remove('click', this._onClick, this);
-        },
-        setParent: function (parent) {
-            this._parent = parent;
-        },
-        getParent: function () {
-            return this._parent;
-        },
-        _onClick: function (e) {
-            const coords = e.get('coords');
-
-            popupForm(formFeedback, {
-                left: e.get('pagePixels')[0],
-                top: e.get('pagePixels')[1],
-                coords,
-                id: -1
-            });
-
-            ymaps.geocode(coords)
-                .then(function (res) {
-                    const firstGeoObject = res.geoObjects.get(0);
-
-                    labelAddress.innerHTML = firstGeoObject.getAddressLine();
-                })
-        }
-
-    };
-*/
-
     mapFeedback.events.add('click', function (e) {
         const coords = e.get('coords');
 
@@ -179,8 +139,6 @@ function init() {
 
     mapFeedback.geoObjects.add(clusterer);
 
-    // ymaps.behavior.storage.add('clickbehavior', ClickBehavior); // eslint-disable-line no-undef
-    // mapFeedback.behaviors.enable('clickbehavior');
     mapFeedback.behaviors.disable(['rightMouseButtonMagnifier']);
 
     btnCloseForm.addEventListener('click', () => {
@@ -206,17 +164,20 @@ function init() {
             });
 
         } else {
+            let coords, newFeedback;
+
+            coords = formFeedback.getAttribute('data-coords').split(',');
+
             feedbacks.push([{
                 user: inputUser.value,
                 place: inputPlace.value,
                 feedback: areaFeedback.value,
                 timestamp: formatter.format(new Date())
             }]);
+            coordsFeedbacks.push(coords);
 
-            let coords, newFeedback;
             const geoId = feedbacks.length - 1;
 
-            coords = formFeedback.getAttribute('data-coords').split(',');
             newFeedback = new ymaps.Placemark(
                 coords,
                 getPointProperties(geoId, feedbacks[geoId]),
@@ -225,6 +186,7 @@ function init() {
 
             clusterer.add(newFeedback);
         }
+        console.log('coordsFeedbacks=', coordsFeedbacks);
         e.preventDefault();
         closeForm(formFeedback);
     });
@@ -232,12 +194,14 @@ function init() {
     document.addEventListener('click', e => {
         if (e.target.className === 'cluster-list') {
             const id = e.srcElement.getAttribute('data-id');
-            console.log(id);
-            console.log(e);
-            console.log(mapFeedback.geoObjects);
-            console.log(mapFeedback.geoObjects.get(id));
-            console.log(mapFeedback.geoObjects.get(id).properties.get('geoId'));
-            // let clickPointEvent = new IEventManager();
+
+            clusterer.balloon.close();
+            popupForm(formFeedback, {
+                left: e.clientX,
+                top: e.clientY,
+                coords: coordsFeedbacks[id].coords,
+                id
+            });
         }
     });
 }

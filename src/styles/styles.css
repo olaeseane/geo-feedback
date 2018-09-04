@@ -1,0 +1,153 @@
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Fira Sans', sans-serif;
+}
+
+html, body, #mapFeedback {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+ol, ul {
+    list-style-type: none;
+}
+
+#form {
+    position: absolute;
+    z-index: 10;
+    width: 380px;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #fff;
+}
+
+.container {
+    width: 350px;
+    margin: 0 auto;
+
+}
+
+.header {
+    background-color: #ff8862;
+    position: relative;
+}
+
+.header-text {
+    font-weight: 300;
+    font-size: 12px;
+    color: #fff;
+    padding: 15px 30px;
+    background-image: url(../img/icon-location.png);
+    background-repeat: no-repeat;
+    background-position: 15px 50%;
+}
+
+.header-closebtn {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background-image: url(../img/icon-close.png);
+    top: 15px;
+    right: 13px;
+    cursor: pointer;
+}
+
+div.feedbacks-list {
+    border-bottom: 1px solid #f0f0f0;
+    padding: 18px 0;
+    height: 153px;
+}
+
+ul.feedbacks-list {
+    height: 153px;
+    overflow-y: auto;
+    font-size: 14px;
+}
+
+.feedback-item {
+    margin-bottom: 25px;
+}
+
+.feedback-item-user,
+.feedback-item-place,
+.feedback-item-timestamp {
+    display: inline-block;
+    color: #4f4f4f;
+}
+
+.feedback-item-user {
+    font-size: 16px;
+    font-weight: 500;
+    margin-right: 11px;
+}
+
+.feedback-item-place,
+.feedback-item-timestamp {
+    font-size: 14px;
+    font-weight: 400;
+    opacity: 0.75;
+}
+
+.feedback-item-place {
+    margin-right: 5px;
+}
+
+.feedback-item-content {
+    margin-top: 8px;
+}
+
+.feedback-header {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: #ff8862;
+    text-transform: uppercase;
+    padding: 12px 8px;
+}
+
+.feedback-user,
+.feedback-place,
+.feedback-content {
+    width: 100%;
+    margin-bottom: 14px;
+    outline: none;
+    font-size: 15px;
+    font-weight: 300;
+    border-radius: 20px;
+    border: 1px solid #C4C4C4;
+    padding: 7px 13px;
+}
+
+.feedback-content {
+    height: 131px;
+    resize: none;
+    margin-bottom: 0;
+}
+
+.feedback-addbtn {
+    position: relative;
+    height: 56px;
+}
+
+.feedback-addlink {
+    text-decoration: none;
+    color: #fff;
+    position: absolute;
+    padding: 8px 17px;
+    font-size: 12px;
+    font-weight: 300;
+    bottom: 15px;
+    right: 0;
+    background-color: #ff8862;
+    border-radius: 10px;
+}
+
+.display-none {
+    display: none;
+}

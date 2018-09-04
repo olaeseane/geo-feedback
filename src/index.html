@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Geo-feedback</title>
+    <!--<script src="https://api-maps.yandex.ru/2.1/?load=Map,Placemark,geoObject.addon.balloon&amp;lang=ru_RU" type="text/javascript"></script>-->
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+    <script src="handlebars-v4.0.11.js" type="text/javascript"></script>
+    <script src="index.js"></script>
+    <link rel="stylesheet" href="./styles/styles.css">
+</head>
+
+<body>
+
+<div id="mapFeedback"></div>
+
+
+<div id="form" class="display-none">
+    <div class="header">
+        <div class="header-text">Адрес отзыва</div>
+        <div class="header-closebtn"></div>
+    </div>
+    <div class="container">
+
+        <div class="feedbacks-list">
+            <ul class="feedbacks-list">
+                <!--Handlebars template here-->
+            </ul>
+        </div>
+        <h1 class="feedback-header">Ваш отзыв</h1>
+        <input class="feedback-user" type="text" placeholder="Ваше имя" name="user">
+        <input class="feedback-place" type="text" placeholder="Укажите место" name="place">
+        <textarea class="feedback-content" placeholder="Поделитесь впечатлениями" name="feedback"></textarea>
+        <div class="feedback-addbtn"><a class="feedback-addlink" href="">Добавить</a></div>
+    </div>
+</div>
+
+<script id="feedbacks-list-template" type="text/x-handlebars-template">
+    {{#each feedbacks}}
+    <li class="feedback-item">
+        <div class="feedback-item-user">{{user}}</div>
+        <div class="feedback-item-place">{{place}}</div>
+        <div class="feedback-item-timestamp">{{timestamp}}</div>
+        <div class="feedback-item-content">{{feedback}}</div>
+    </li>
+    {{/each}}
+</script>
+
+
+</body>
+
+</html>
